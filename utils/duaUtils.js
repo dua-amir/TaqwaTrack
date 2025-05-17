@@ -1,4 +1,3 @@
-// duaUtils.js
 
 // Expanded list of daily duas
 const dailyDuas = [
@@ -82,8 +81,6 @@ const dailyDuas = [
   
   // Function to fetch daily dua (can be modified to fetch from API or database)
   export const fetchDailyDua = () => {
-    // For simplicity, return a random dua or the first dua in the array
-    // You can customize this based on the day or other logic
     const randomIndex = Math.floor(Math.random() * dailyDuas.length);
     return dailyDuas[randomIndex];
   };

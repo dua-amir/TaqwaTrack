@@ -1,4 +1,4 @@
-// dateUtils.js
+
 import moment from 'moment-hijri'; // Import the moment-hijri library for Hijri date conversion
 
 // Function to get today's Gregorian date
