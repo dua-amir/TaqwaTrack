@@ -76,7 +76,7 @@ const HomeScreen = () => {
   }}
   imageStyle={{
     borderRadius: 25,
-    resizeMode: 'cover', // better for full background coverage
+    resizeMode: 'cover',
   }}
 >
         <Text style={[globalStyles.centerText, 
