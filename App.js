@@ -1,33 +1,4 @@
-/*
-// App.js
-import React from 'react';
-import { StatusBar, SafeAreaView, Platform, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import AppNavigator from './Navigation/AppNavigator';
 
-const App = () => {
-  return (
-    <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="dark-content" backgroundColor="#f5f5f5" />
-
-      <NavigationContainer>
-        <AppNavigator />
-      </NavigationContainer>
-    </SafeAreaView>
-  );
-};
-
-export default App;
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-  },
-});
-*/
-// App.js
 import React from 'react';
 import { StatusBar, View, StyleSheet } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
