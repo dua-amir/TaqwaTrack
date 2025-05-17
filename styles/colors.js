@@ -1,4 +1,4 @@
-// styles/colors.js
+
 export const colors = {
   background: '#FFFFFF',
   primary: '#6A0DAD',
@@ -8,3 +8,4 @@ export const colors = {
   inputBackground: '#F2F2F2',
   error: '#FF3333',
 };
+
