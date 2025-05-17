@@ -1,28 +1,3 @@
-/*
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
-import TasbeehatScreen from '../screens/TasbeehatScreen';
-import DailyAzkarScreen from '../screens/DailyAzkarScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import WeeklyScreen from '../screens/WeeklyScreen';
-
-const Tab = createBottomTabNavigator();
-
-const TabNavigator = () => {
-  return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Tasbeehat" component={TasbeehatScreen} />
-      <Tab.Screen name="DailyAzkar" component={DailyAzkarScreen} />
-      <Tab.Screen name="WeeklyReport" component={WeeklyScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-    </Tab.Navigator>
-  );
-};
-
-export default TabNavigator;
-*/
 
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
