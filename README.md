@@ -47,9 +47,9 @@ Taqwa-Track/
 
 🚀 Getting Started
 1. Clone the Repository
-git clone https://github.com/dua-amir/taqwa-track.git
+git clone https://github.com/dua-amir/taqwatrack.git
 
-cd taqwa-track
+cd taqwatrack
 
 
 2. Install Dependencies
