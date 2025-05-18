@@ -1,7 +1,7 @@
 // Sample static prayer time (for Islamabad)
 export const prayerTimes = {
     Fajr: '04:30 AM',
-    Dhuhr: '12:15 PM',
+    Dhuhr: '12:45 PM',
     Asr: '04:45 PM',
     Maghrib: '06:45 PM',
     Isha: '08:00 PM',
