@@ -26,7 +26,7 @@ const SplashScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/images/logo.png')} style={styles.logo} />
+      <Image source={require('../assets/images/loggo.png')} style={styles.logo} />
       <ActivityIndicator size="large" color={colors.primary || '#6A0DAD'} />
       <Text style={styles.text}>Loading...</Text>
     </View>

@@ -53,32 +53,31 @@ const HomeScreen = () => {
           Blessings to you, {userName}
         </Text>
         <Image
-          source={require('../assets/images/logo.png')} 
+          source={require('../assets/images/loggo.png')} 
           style={{ width: 40, height: 40, borderRadius: 20, borderWidth:1, borderColor: colors.primary, marginRight: 10 }}
         />
       </View>
 
       {/* Date & Prayer Card */}
       <ImageBackground
-  source={require('../assets/images/date-bg.jpg')}
+  source={require('../assets/images/date--bg.jpg')}
   style={{
     padding: 20,
     borderRadius: 25,
-    overflow: 'hidden',
     marginBottom: 20,
     backgroundColor: '#6C4AB6',
     elevation: 3,
-    width: '100%',
-    aspectRatio: 16 / 9, // instead of fixed height
-    position: 'relative',
+    width: 320,
+    height: 200, // fixed height instead of aspect ratio
     justifyContent: 'center',
     alignItems: 'center',
   }}
   imageStyle={{
     borderRadius: 25,
-    resizeMode: 'cover',
+    resizeMode: 'stretch', // or try 'contain'
   }}
 >
+
         <Text style={[globalStyles.centerText, 
         { 
           position: 'absolute',
