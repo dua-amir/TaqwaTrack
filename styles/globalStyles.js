@@ -115,7 +115,7 @@ header: {
 },
 sectionTitle: {
   fontSize: 18,
-  fontWeight: '600',
+  fontWeight: 'bold',
   color: '#6C4AB6',
   marginTop: 20,
   marginBottom: 10,
