@@ -88,7 +88,7 @@ BSCS - 6th semester
 Riphah International University, Islamabad
 
 
-📜 License
+📜 License:
 This project is licensed under the MIT License.
 
 "Verily, in the remembrance of Allah do hearts find rest." – Qur'an 13:28
