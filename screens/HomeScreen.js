@@ -1,11 +1,10 @@
-
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   View, Text, ScrollView, TouchableOpacity,
   ImageBackground, StatusBar, Image
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { globalStyles } from '../styles/globalStyles';
 import { getTodayHijriDate, getTodayGregorianDate } from '../utils/dateUtils';
 import { fetchDailyDua } from '../utils/duaUtils';
@@ -23,25 +22,29 @@ const HomeScreen = () => {
 
   const navigation = useNavigation();
 
-  useEffect(() => {
-    const loadUser = async () => {
-      try {
-        const userData = await AsyncStorage.getItem('loggedInUser');
-        if (userData) {
-          const user = JSON.parse(userData);
-          setUserName(user.firstName || 'Dua');
-        }
-      } catch (err) {
-        console.warn('Failed to load user info:', err);
+  const loadData = async () => {
+    try {
+      const userData = await AsyncStorage.getItem('loggedInUser');
+      if (userData) {
+        const user = JSON.parse(userData);
+        setUserName(user.firstName || 'Dua');
       }
-    };
+    } catch (err) {
+      console.warn('Failed to load user info:', err);
+    }
 
     setGregorianDate(getTodayGregorianDate());
     setHijriDate(getTodayHijriDate());
     setDailyDua(fetchDailyDua());
     setNextPrayer(getNextPrayer());
-    loadUser();
-  }, []);
+  };
+
+  // Refresh screen when it comes into focus
+  useFocusEffect(
+    useCallback(() => {
+      loadData();
+    }, [])
+  );
 
   return (
     <ScrollView style={[globalStyles.container, { backgroundColor: '#F8F6FA' }]} showsVerticalScrollIndicator={false}>
@@ -60,35 +63,35 @@ const HomeScreen = () => {
 
       {/* Date & Prayer Card */}
       <ImageBackground
-  source={require('../assets/images/date--bg.jpg')}
-  style={{
-    padding: 20,
-    borderRadius: 25,
-    marginBottom: 20,
-    backgroundColor: '#6C4AB6',
-    elevation: 3,
-    width: 320,
-    height: 200, // fixed height instead of aspect ratio
-    justifyContent: 'center',
-    alignItems: 'center',
-  }}
-  imageStyle={{
-    borderRadius: 25,
-    resizeMode: 'stretch', // or try 'contain'
-  }}
->
-
+        source={require('../assets/images/date--bg.jpg')}
+        style={{
+          padding: 20,
+          borderRadius: 25,
+          marginBottom: 20,
+          backgroundColor: '#6C4AB6',
+          elevation: 3,
+          width: 325,
+          height: 200, 
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        imageStyle={{
+          borderRadius: 25,
+          resizeMode: 'stretch',
+        }}
+      >
         <Text style={[globalStyles.centerText, 
-        { 
-          position: 'absolute',
-          top: 15,
-          left: 20,
-          color: 'black',
-          fontSize: 16,
-          textAlign: 'left', 
+          { 
+            position: 'absolute',
+            top: 15,
+            left: 20,
+            color: 'black',
+            fontSize: 16,
+            textAlign: 'left', 
           }]}>
-          📅 {gregorianDate} </Text>
-          <Text style={[globalStyles.centerText, 
+          📅 {gregorianDate}
+        </Text>
+        <Text style={[globalStyles.centerText, 
           { 
             position: 'absolute',
             top: 40,
@@ -97,18 +100,20 @@ const HomeScreen = () => {
             fontSize: 16,
             textAlign: 'left', 
           }]}>
-         🕌 {hijriDate} </Text>
+          🕌 {hijriDate}
+        </Text>
         <Text style={[globalStyles.centerText, 
-        { 
-          position: 'absolute',
-          bottom: 5,
-          alignSelf: 'center',
-          fontWeight: 'bold',
-          color: '#fff',
-          fontSize: 16,
-          textAlign: 'center',
-        }]}>
-          🕰️ Next Prayer: {nextPrayer} </Text>
+          { 
+            position: 'absolute',
+            bottom: 5,
+            alignSelf: 'center',
+            fontWeight: 'bold',
+            color: '#fff',
+            fontSize: 16,
+            textAlign: 'center',
+          }]}>
+          🕰 Next Prayer: {nextPrayer}
+        </Text>
       </ImageBackground>
 
       {/* Ayah Section */}
@@ -133,12 +138,12 @@ const HomeScreen = () => {
           style={[globalStyles.cardButton, { backgroundColor: '#D7F2FF' }]}
           onPress={() => navigation.navigate('DailyAzkar')}
         >
-          <Text style={[globalStyles.cardText, { color: '#6C4AB6' }]}>📿 Subh & Sham Azkar</Text>
+          <Text style={[globalStyles.cardText, { color: '#6C4AB6' }]}>📿 Daily Azkar</Text>
         </TouchableOpacity>
       </View>
 
       {/* Salah Checklist */}
-      <Text style={globalStyles.sectionTitle}>🗓️ Today’s Salah Checklist</Text>
+      <Text style={globalStyles.sectionTitle}>🗓 Today’s Salah Checklist</Text>
       <View style={{ marginBottom: 40 }}>
         <PrayerChecklist />
       </View>

@@ -1,9 +1,9 @@
-
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Text, StyleSheet, Dimensions, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { LineChart } from 'react-native-chart-kit';
 import { getPrayerData, deleteWeeklyData } from '../context/api';
 import { colors } from '../styles/colors';
+import { useFocusEffect } from '@react-navigation/native';
 
 const WeeklyScreen = () => {
   const [chartData, setChartData] = useState([]);
@@ -24,6 +24,7 @@ const WeeklyScreen = () => {
   };
 
   const fetchWeekly = async () => {
+    setLoading(true);
     const past7 = getPast7Days();
     const counts = [];
     const labelList = [];
@@ -49,27 +50,29 @@ const WeeklyScreen = () => {
     setLoading(false);
   };
 
-  useEffect(() => {
-    fetchWeekly();
-  }, []);
+  // Refresh when screen is focused
+  useFocusEffect(
+    useCallback(() => {
+      fetchWeekly();
+    }, [])
+  );
 
   const handleDelete = async () => {
     await deleteWeeklyData();
     await fetchWeekly();
   };
 
-  if (loading) 
+  if (loading)
     return <ActivityIndicator size="large" color={colors.primary} style={{ flex: 1, justifyContent: 'center' }} />;
 
   return (
     <View style={styles.container}>
-
-      {/* Floating Heading outside card */}
+  
       <View style={styles.headingContainer}>
         <Text style={styles.heading}>🕌 Weekly Prayer Tracker</Text>
       </View>
 
-      {/* Card */}
+
       <View style={styles.card}>
         <Text style={styles.statsText}>
           You’ve completed <Text style={styles.highlight}>{totalCompleted}</Text> out of{' '}
@@ -97,11 +100,10 @@ const WeeklyScreen = () => {
         />
       </View>
 
-      {/* Floating Reset button outside card */}
+
       <TouchableOpacity style={styles.button} onPress={handleDelete}>
         <Text style={styles.buttonText}>Reset Weekly Data</Text>
       </TouchableOpacity>
-
     </View>
   );
 };
@@ -119,7 +121,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderRadius: 20,
     marginBottom: 20,
-    // subtle shadow for the heading container
     shadowColor: '#000',
     shadowOpacity: 0.15,
     shadowRadius: 6,
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
     borderColor: colors.primary,
-    borderWidth:1,
+    borderWidth: 1,
     borderRadius: 20,
     padding: 22,
     width: '90%',
@@ -169,7 +170,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     borderRadius: 25,
     marginTop: 20,
-    // shadow for button
     shadowColor: '#000',
     shadowOpacity: 0.2,
     shadowRadius: 8,
